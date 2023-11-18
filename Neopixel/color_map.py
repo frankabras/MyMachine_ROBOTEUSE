@@ -1,0 +1,46 @@
+""" Several colors for neopixel """
+WHITE = (255,255,255)
+GREY = (50,50,50)
+BLACK = (0, 0, 0)
+
+#Blue
+NAVY = (0,0,25)
+MIDNIGHT_BLUE = (0,0,50)
+MEDIUM_BLUE = (0,0,205) 
+BLUE = (0,0,255)
+ROYAL_BLUE = (50,50,225)
+
+PURPLE = (128,0,128)
+
+#Red
+DARK_RED = (50,0,0)
+CRIMSON = (220,20,60)
+RED = (255,0,0)
+ORANGE_RED = (255,69,0)
+TOMATO = (255,99,71)
+LIGHT_RED = (255,100,100)
+
+#Orange
+LIGHT_ORANGE = (255,190,0)
+ORANGE = (255,90,0)
+DARK_ORANGE = (255,140,0)
+CHOCOLATE = (210,105,30)
+
+#Yellow
+LIGHT_YELLOW = (255,255,65)
+CORN_SILK = (255,248,220)
+YELLOW = (255,255,0)
+GOLD = (255,215,0)
+
+#Green
+GREEN = (0,255,0)
+LIGHT_GREEN = (100,255,100)
+
+
+
+
+
+
+
+
+
