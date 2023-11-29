@@ -1,40 +1,34 @@
 from mfrc522 import MFRC522
 import utime
+              
+reader = MFRC522(spi_id=0,sck=2,miso=4,mosi=3,cs=1,rst=0)
+my_UID = "[0x37, 0x89, 0x02, 0x33]"
 
-# initialize RFID object
-reader = MFRC522(spi_id=0,sck=18,miso=16,mosi=19,cs=17,rst=0)
-print("Hold a tag near the reader")
+print("")
+print("Place card into reader")
+print("")
 
-# define parameters for acessing tag
-key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
 PreviousCard = [0]
 
-while True:
-    # start commuication with RFID reader
-    reader.init()
-    (stat, tag_type) = reader.request(reader.REQIDL)
-    # check if a tag can be read
-    if stat == reader.OK:
-        # read tag
-        (stat, uid) = reader.SelectTagSN()
-        # check if tag is the same as before
-        if uid == PreviousCard:
-            continue
-        
-        # check if reading went well
+try:
+    while True:
+
+        reader.init()
+        (stat, tag_type) = reader.request(reader.REQIDL)
         if stat == reader.OK:
-            #print base information about tag
-            print("Card detected {} uid={}".format(hex(int.from_bytes(bytes(uid),"little",False)).upper(),reader.tohexstring(uid)))
-            print()
-            # print all blocks of the tag
-            print("Read from tag:")
-            reader.MFRC522_DumpClassic1K(uid, Start=0, End=64, keyA=key)
-            print()
+            (stat, uid) = reader.SelectTagSN()
+            if uid == PreviousCard:
+                continue
 
-            PreviousCard = uid
-            
-    else:
-        # reset already read tag
-        PreviousCard=[0]
+            if stat == reader.OK:
+                UID = reader.tohexstring(uid)
+                print(UID)
+                if UID == my_UID:
+                    print("OK")
+                PreviousCard = uid
+        else:
+            PreviousCard=[0]
+        utime.sleep_ms(50)                
 
-utime.sleep_ms(50)
+except KeyboardInterrupt:
+    print("Bye")

@@ -2,4 +2,5 @@
 Prop3=19,11
 [InternetShortcut]
 IDList=
-URL=https://github.com/pimylifeup/MFRC522-python
+URL=https://github.com/kevinmcaleer/pico-rfid
+HotKey=0
