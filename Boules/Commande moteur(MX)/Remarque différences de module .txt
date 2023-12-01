@@ -1,0 +1,1 @@
+Le MX et le TB fonctionnnent de la même façon sauf qu'avec le TB on a la possibilité de choisir la vitesse de rotation par PWM
