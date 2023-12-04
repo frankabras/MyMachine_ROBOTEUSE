@@ -75,7 +75,7 @@ while True:
         eyes.neopixel_display(YELLOW_EYES)		#Changes eye color to yellow
         
         #CODE TO BE COMPLETED (Screen)
-        utime.sleep(5)													
+        utime.sleep(3)													
         
         actual_state = STATE[3]					#Transistion to the fourth state
         
