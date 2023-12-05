@@ -82,26 +82,35 @@ while True:
     elif actual_state == "QUIZZ":
         print("QUIZZ")
         
-        #CODE TO BE COMPLETED (Display Quizz)
-        
-        #Wait answer of yhe Quizz 
-        # -> If good answer : Transistion to the fifth state
-        # -> If bad answer : Transistion to the sixth state
-        
-        actual_state = STATE[4]					#Transistion to the fifth state
+        operation, result = quizz_math()
+        print(operation)
+        user_result = int(input("Entrez votre réponse : "))
+
+        #Checks the result
+        if user_result == result:       #Good answer
+            print("Bonne réponse")
+            actual_state = STATE[4]     #Transistion to the fifth state
+        else:                           #Bad answer
+            print("Mauvaise réponse")
+            actual_state = STATE[5]     #Transistion to the sixth state
         
     elif actual_state == "QUIZZ_TRUE":
         print("QUIZZ_TRUE")
         mouth.on()								#Opens mouth (relay)
         
-        #CODE TO BE COMPLETED (End of game - Screen)
-        utime.sleep(5)
+        eyes.neopixel_display(LIGHT_OFF)
+        utime.sleep(2)
+        eyes.neopixel_display(GREEN_EYES)
         
         actual_state = STATE[0]					#Transistion to the initial state
         
     elif actual_state == "QUIZZ_FALSE":
         print("QUIZZ_FALSE")
         
-        #CODE TO BE COMPLETED
+        eyes.neopixel_display(LIGHT_OFF)
+        utime.sleep(2)
+        eyes.neopixel_display(YELLOW_EYES)
+        utime.sleep(2)
+        eyes.neopixel_display(LIGHT_OFF)
         
         actual_state = STATE[0]					#Transistion to the initial state
