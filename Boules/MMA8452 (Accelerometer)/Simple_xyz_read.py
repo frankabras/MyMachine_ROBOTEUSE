@@ -6,7 +6,7 @@ import time
 from machine import Pin, I2C
 from micropython_mma8452q import mma8452q
 
-i2c = I2C(0, sda=Pin(0), scl=Pin(1))  # Correct I2C pins for RP2040
+i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
 mma = mma8452q.MMA8452Q(i2c)
 
 try:

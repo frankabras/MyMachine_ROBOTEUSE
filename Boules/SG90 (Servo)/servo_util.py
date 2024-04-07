@@ -38,7 +38,7 @@ class servomoteur:
 
 if __name__ == "__main__":
     # execute only if run as the main module (i.e. not an import module)
-    servo = servomoteur(0)
+    servo = servomoteur(14)
     position = int(input("Enter position of servo (0 to 180°) : "))
 
     while position != 999:

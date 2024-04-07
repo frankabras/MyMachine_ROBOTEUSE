@@ -1,9 +1,6 @@
 from machine import Pin , PWM
 from utime import sleep
 
-#TB6612FNG
-#MX
-
 PWM_FREQUENCY = 1000
 
 class bimotors_driver:
