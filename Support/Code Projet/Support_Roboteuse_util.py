@@ -4,6 +4,7 @@ Creation date:	03 december 2023
 Update date:	01 march 2024
 Description:	File with the functions usefull for the Support_Roboteuse.py program
 *********************************************************************************"""
+import utime
 from random import *
 import ujson as json
 from nextion_hmi import *
@@ -39,13 +40,13 @@ def save_new_question(data):
     }]
     
     #Saving new question in json file
-    with open(questions_file, "w") as file:
-        json.dump(questions, file)
+    with open(questions_file, "a") as file:
+        json.dump(question, file)
 
 def hmi_setting_up(nxt,player):
     recv = ""
     while recv != "UNLOCK":
-        if nxt.any():
+        if nxt.NXT.any():
             recv = nxt.recv()
             if recv == "test_volume":		#Code to test volume
                 player.play(2)
@@ -54,8 +55,8 @@ def hmi_setting_up(nxt,player):
                 data = recv.split("_")
                 player.volume(int(data[1]))
             elif recv == "newquestion":		#Code to add new question
-                while nxt.any() <= 0:
-                    pass
+                while nxt.NXT.any() <= 0:
+                    continue
                 else:
                     recv=nxt.recv()
                     if recv == "cancel":	#Cancel request
@@ -63,11 +64,11 @@ def hmi_setting_up(nxt,player):
                     else:
                         save_new_question(recv)
                     
-def display_quizz(quizz_data):
-    changeTXT(dispQuestion,quizz_data[0])	#To display question
-    changeTXT(dispOption1,quizz_data[1])	#To display option n°1
-    changeTXT(dispOption2,quizz_data[2])	#To display option n°2
-    changeTXT(dispOption3,quizz_data[3])	#To display option n°3
+def display_quizz(nxt,quizz_data):
+    nxt.changeTXT(dispQuestion,quizz_data[0])	#To display question
+    nxt.changeTXT(dispOption1,quizz_data[1])	#To display option n°1
+    nxt.changeTXT(dispOption2,quizz_data[2])	#To display option n°2
+    nxt.changeTXT(dispOption3,quizz_data[3])	#To display option n°3
     
 
 
@@ -113,7 +114,7 @@ def quizz_generator():
             result = n1*n2
         else:                   #Division
             operation = str(n1)+" / "+str(n2)+" = ?"
-            result = n1/n2
+            result = int(n1/n2)
         
         #Data returned within the defined format
         data = operation,str(result),str(randint(1,100)),str(randint(1,100)),str(result)

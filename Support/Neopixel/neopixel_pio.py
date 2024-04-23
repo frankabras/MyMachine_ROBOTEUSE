@@ -47,9 +47,9 @@ class neopixel_pio:
         # Array type, see : https://docs.python.org/3/library/array.html
         self.ar = array.array("I",[0]*num_leds)
         for i, color in enumerate(pattern):
-            self.ar[i]=pixel_set_and_dim(color,self.brightness)
+            self.ar[i]=self.pixel_set_and_dim(color,self.brightness)
 
-        self.sm.put(ar, 8) # pushes a word of data to the state machine
+        self.sm.put(self.ar, 8) # pushes a word of data to the state machine
         # second parameter indicates a shift value for each pushed data (from ar).
         # data is coded with 32 bits, so the value pushes the 24 bits at the right position.
     
@@ -57,7 +57,11 @@ class neopixel_pio:
     def shutdown(self):
         self.ring=[BLACK]*self.num_leds # complete ring
         self.draw_ring(self.ring, self.num_leds)
-
+    
+    #Function to display pattern
+    def neopixel_display(self, pattern):
+        self.draw_ring(pattern, self.num_leds)
+    
     #Function to simulate a flash
     #   Delay       : Delay in ms of pattern1 displaying
     #   pattern1    : First pattern to be displayed
