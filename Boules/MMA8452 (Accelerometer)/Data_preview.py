@@ -1,11 +1,11 @@
 import time
 import uos
 from machine import Pin, I2C
-from micropython_mma8452q import mma8452q
+from micropython_mma8452q import mma8452q, i2c_helpers
 
 file = "acc_data.csv"
 
-i2c = I2C(0, sda=Pin(0), scl=Pin(1))  # Correct I2C pins for RP2040
+i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
 mma = mma8452q.MMA8452Q(i2c)
 
 f = open(file, "w") # "w" overwrire file, "a" append to file
@@ -28,7 +28,7 @@ except KeyboardInterrupt:
     print("End of program")
     
 f.close()
-
+ 
 fsys_info = uos.statvfs('/')    # 
 freeSize=fsys_info[3]           # number of remaining free blocks after adding data
                                 # for Raspberry Pi Pico a block is 4096 bytes

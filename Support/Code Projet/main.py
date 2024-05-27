@@ -36,7 +36,7 @@ rc522 = MFRC522(spi_id=0,sck=2,miso=4,mosi=3,cs=1,rst=0)
 STATE = ["STANDBY", "BALL_IS_NOT_PRESENT", 
          "QUIZZ","GOOD","BAD","END_OF_GAME"]
 #RFID
-BALL_UID = "[0x37, 0x89, 0x02, 0x33]" #[0xEB, 0xC8, 0x50, 0x3E]
+BALL_UID = "" #Put UID here
 READ_UID = ""
 ballPresence = False
 
@@ -64,7 +64,7 @@ while True:
             if recv_nxt == "LOCK":				#Locks the game during setup
                 hmi_setting_up(nxt,mp3)			#Setup function
             else:
-                print("données non reconnue")
+                print("données non reconnues")
         else:   
             READ_UID = read_uid(rc522)			#Checks if the ball is still on the holder
             if READ_UID != BALL_UID:			#if not, transistion to the second state
@@ -73,7 +73,7 @@ while True:
                 actual_state = STATE[1]			#Transistion to the second state
                 playMP3 = True					
             
-        utime.sleep_ms(50) 
+        utime.sleep_ms(300) 
     elif actual_state == "BALL_IS_NOT_PRESENT":	#Second state: ball not on the holder
         print("Waiting")
         eyes.neopixel_display(RED_EYES) 		#Changes eye color to red

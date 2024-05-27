@@ -60,15 +60,15 @@ class bimotors_driver:
 
 if __name__ == "__main__":
     # execute only if run as the main module (i.e. not an import module)
-    driver = bimotors_driver(10, 11, 12, 20, 21, 22)
+    driver = bimotors_driver(8, 7, 6, 10, 11, 12)
 
     try:
         while True :
-            driver.rotate_cw()
+            driver.rotate_cw(speed=32000)
             sleep(5)
             driver.stop_rotate()
             sleep(1)
-            driver.rotate_ccw()
+            driver.rotate_ccw(speed=65000)
             sleep(5)
             driver.stop_rotate()
             sleep(1)
